@@ -8,8 +8,6 @@ import CauthRoutes from "./routes/CauthRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
-const serverless = require('@vendia/serverless-express');
-
 dotenv.config();
 const app = express();
 
@@ -27,12 +25,15 @@ app.use(
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true); // Allow requests from listed origins
       } else {
-        callback(new Error("Not allowed by CORS")); // Reject requests from other origins
+        callback(new Error("Not allowed by CORS"));
       }
     },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],  // Allow preflight OPTIONS and other methods
+    allowedHeaders: ["Content-Type", "Authorization"],  // Allow specific headers if needed
   })
 );
+
 
 
 app.use(express.json({ limit: "50mb" })); 
@@ -52,4 +53,3 @@ connectDB();
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-module.exports.handler = serverless(app);
