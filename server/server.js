@@ -16,9 +16,20 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+const allowedOrigins = [
+  "https://cartify-market-ocb7ag961-muhammad-talhas-projects-a3a7b800.vercel.app",  // Production frontend URL
+  "http://localhost:5173",  // Local development frontend URL
+];
+
 app.use(
   cors({
-    origin: "https://cartify-marketplace-ahyfprssc-muhammad-talhas-projects-a3a7b800.vercel.app",  // Your production frontend URL
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow requests from listed origins
+      } else {
+        callback(new Error("Not allowed by CORS")); // Reject requests from other origins
+      }
+    },
     credentials: true,
   })
 );
