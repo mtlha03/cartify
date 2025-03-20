@@ -8,6 +8,7 @@ import CauthRoutes from "./routes/CauthRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+const serverless = require('@vendia/serverless-express');
 
 dotenv.config();
 const app = express();
@@ -33,3 +34,5 @@ app.use("/order", orderRoutes);
 connectDB();
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+module.exports.handler = serverless(app);

@@ -4,17 +4,16 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-
- "scripts": {
-  "start": "node server.js",
-  "dev": "nodemon server.js",
-  "build": "echo 'No build step required for backend'"
-}
-,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo 'No build step required for backend'"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vendia/serverless-express": "^4.12.6",
     "bcryptjs": "^3.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
