@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import config from '../config';
 
 const ForgotPasswordModal = ({ isOpen, onClose }) => {
   const [step, setStep] = useState(1);
@@ -14,7 +15,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
 
   const handleSendOTP = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/auth/forgot-password", { email });
+      const response = await axios.post(`${config.apiUrl}/auth/forgot-password`, { email });
       setMessage(response.data.message);
       setStep(2);
     } catch (err) {
@@ -24,7 +25,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
 
   const handleVerifyOTP = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/auth/verify-otp", { email, otp });
+      const response = await axios.post(`${config.apiUrl}/auth/verify-otp`, { email, otp });
       setMessage(response.data.message);
       setStep(3);
     } catch (err) {
@@ -37,7 +38,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
       return setError("Passwords do not match");
     }
     try {
-      const response = await axios.post("http://localhost:5000/auth/reset-password", { email, password });
+      const response = await axios.post(`${config.apiUrl}/auth/reset-password`, { email, password });
       setMessage(response.data.message);
       onClose(); 
     } catch (err) {

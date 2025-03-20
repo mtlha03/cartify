@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Nav from "../components/Nav";
+import config from '../config';
 
 const Home = () => {
   const [stores, setStores] = useState([]);
@@ -10,7 +11,7 @@ const Home = () => {
   useEffect(() => {
     const fetchStores = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/auth/store-info");
+        const response = await axios.get(`${config.apiUrl}/api/auth/store-info`);
         setStores(response.data);
       } catch (error) {
         console.error("Error fetching store data:", error);

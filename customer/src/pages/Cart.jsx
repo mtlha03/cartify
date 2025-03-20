@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import config from '../config';
 import {
   removeItem,
   incrementQuantity,
@@ -26,7 +27,7 @@ const Cart = () => {
   const fetchCart = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:5000/cart/cart", {
+      const response = await axios.get(`${config.apiUrl}/cart/cart`, {
         withCredentials: true,
       });
 
@@ -53,7 +54,7 @@ const Cart = () => {
 
   const handleRemoveItem = async (productId) => {
     try {
-      await axios.delete("http://localhost:5000/cart/remove", {
+      await axios.delete(`${config.apiUrl}/cart/remove`, {
         withCredentials: true,
         data: { productId },
       });
@@ -72,7 +73,7 @@ const Cart = () => {
 
     try {
       await axios.put(
-        "http://localhost:5000/cart/increment",
+        `${config.apiUrl}/cart/increment`,
         { productId },
         { withCredentials: true }
       );
@@ -90,7 +91,7 @@ const Cart = () => {
 
     try {
       await axios.put(
-        "http://localhost:5000/cart/decrement",
+        `${config.apiUrl}/cart/decrement`,
         { productId },
         { withCredentials: true }
       );
@@ -114,7 +115,7 @@ const Cart = () => {
   const handleSubmitOrder = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/order/place",
+        `${config.apiUrl}/order/place`,
         { ...orderDetails, cartItems: cart },
         { withCredentials: true }
       );
