@@ -1,5 +1,5 @@
 const config = {
-    apiUrl: 'https://carti-server-ge5l7z8gj-muhammad-talhas-projects-a3a7b800.vercel.app/'
+    apiUrl: 'https://carti-server-j7avpwae7-muhammad-talhas-projects-a3a7b800.vercel.app'
   };
   
   export default config;
